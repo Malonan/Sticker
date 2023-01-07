@@ -18,7 +18,7 @@ func JoinToGroup(c tele.Context) error {
 	}
 	msg := `Sticker admins have joined the group, are you ready to be filled with my wrath? (just kidding)
 You can deploy an identical instance at https://github.com/Malonan/Sticker, or you can learn how to use this bot.`
-	c.Send(msg)
+	fn.S(c, msg)
 	Add(c.Chat().ID)
 	return GetAdminList(c)
 }

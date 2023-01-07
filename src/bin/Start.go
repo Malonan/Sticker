@@ -9,7 +9,7 @@ func Start(c tele.Context) error {
 	if c.Chat().Type != "private" {
 		return nil
 	}
-	msg := `Sticker admins have joined the group, are you ready to be filled with my wrath? (just kidding)
+	msg := `This is me! Are you ready to be filled with my wrath? (just kidding)
 You can deploy an identical instance at https://github.com/Malonan/Sticker, or you can learn how to use this bot.`
 	c.Send(msg)
 	return nil

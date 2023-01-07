@@ -106,7 +106,7 @@ func GetAdminList(c tele.Context) error {
 	}
 	json.Unmarshal([]byte(gjson.GetBytes(d, "result").String()), &b)
 	if len(b) == 0 {
-		c.Send("Oh no....bot failed to fetch admin list....please check what happened....")
+		fn.SA(c, 10,"Oh no....bot failed to fetch admin list....please check what happened....")
 		return nil
 	}
 	admin := make(map[int64]int)
@@ -115,6 +115,7 @@ func GetAdminList(c tele.Context) error {
 	}
 	rd.Set(ctx, "sticker_Admin_"+cast.ToString(c.Chat().ID), String(admin), 0)
 	db.Updates(&dbstr.Config{Gid: c.Chat().ID, Admin: String(admin)})
+	fn.SA(c, 10, "The admin list has been refreshed.")
 	return nil
 }
 
