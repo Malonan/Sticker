@@ -1,0 +1,30 @@
+# Telegram Bot API Key
+Key: 
+# DataBase Info
+# Note, SSL is not supported, please change the source code if necessary
+database:
+# Database Address
+  addr: 127.0.0.1:3306
+  # username
+  user: ImCommingForYou
+  # Database Password
+  pass: stickerbot
+  # Database name
+  db: sticker
+# Caching database (required)
+# Required environment: Redis@7+
+# Please don't use DragonflyDB!!! It causes some problems!!!
+# Please wait for DragonflyDB's API version to follow up!!!
+cache:
+  addr: 127.0.0.1:3408
+  pwd:
+  db: 2
+# Super Administrator List
+admin: 
+  - 114514
+# Whitelist mode; Default is false
+# After it is enabled, the robot will only process requests from groups in the whitelist.
+whitelist_mode: false
+# Whitelist Group List
+whitelist:
+  - 12345
