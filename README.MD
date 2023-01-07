@@ -4,7 +4,7 @@
 
 
 <br>
-<p align="center"><a href="https://github.com/Malonan/Sticker/releases">Download</a> | <a href="https://github.com/Malonan/Sticker/wiki">Wiki</a> | <a href="https://github.com/Malonan/Sticker/issues">Issues</a> | <a href="https://github.com//Malonan/Sticker#Donate">Donate</a> | <a href="https://github.com//Malonan/Sticker#Notice">Notice</a></p>
+<p align="center"><a href="https://github.com/Malonan/Sticker/releases">Download</a> | <a href="https://github.com/Malonan/Sticker/tree/master/wiki">Wiki</a> | <a href="https://github.com/Malonan/Sticker/issues">Issues</a> | <a href="https://github.com//Malonan/Sticker#Donate">Donate</a> | <a href="https://github.com//Malonan/Sticker#Notice">Notice</a></p>
 
 <br>
 

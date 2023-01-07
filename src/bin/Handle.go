@@ -5,8 +5,8 @@ import (
 )
 
 func Handle(t *tele.Bot) {
-	t.Handle("/start", Start)        // 开始
-	t.Handle("/make", StickerBan)               // 录入贴纸包数据
+	t.Handle("/start", Start)
+	t.Handle("/make", StickerBan)
 	t.Handle("/refresh", Refresh)
 	t.Handle(tele.OnSticker, ServiceSticker)
 	t.Handle(tele.OnAddedToGroup, JoinToGroup)

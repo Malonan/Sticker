@@ -9,7 +9,9 @@ func Start(c tele.Context) error {
 	if c.Chat().Type != "private" {
 		return nil
 	}
-	c.Send("Hello World!")
+	msg := `Sticker admins have joined the group, are you ready to be filled with my wrath? (just kidding)
+You can deploy an identical instance at https://github.com/Malonan/Sticker, or you can learn how to use this bot.`
+	c.Send(msg)
 	return nil
 }
 
@@ -17,6 +19,15 @@ func Refresh(c tele.Context) error {
 	if c.Chat().Type != "supergroup" {
 		c.Send("What?")
 		return nil
+	}
+	// If whitelisted groups are enabled
+	if F.Bool("whitelist_mode") {
+		// Stop serving non-whitelisted groups
+		if WhiteList[c.Chat().ID] != 1 {
+			fn.S(c, "This group is not available for this function!!!")
+			// leave group
+			return c.Bot().Leave(c.Chat())
+		}
 	}
 	admin := Int64Map(rd.Get(ctx, "sticker_Admin_"+cast.ToString(c.Chat().ID)).Result())
 	if len(admin) == 0 {
