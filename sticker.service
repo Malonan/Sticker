@@ -1,0 +1,17 @@
+[Unit]
+Description=sticker
+After=network.target
+Wants=network.target
+
+[Service]
+WorkingDirectory=/root/sticker
+ExecStart=/root/sticker/sticker
+Restart=on-abnormal
+RestartSec=5s
+KillMode=mixed
+
+StandardOutput=null
+StandardError=syslog
+
+[Install]
+WantedBy=multi-user.target
