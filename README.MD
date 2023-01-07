@@ -49,7 +49,7 @@ git, wget, GNU Make, golang(must 1.19.x), then no more
 1. `wget https://github.com/Malonan/Sticker/raw/Config/sticker.service`
 2. Modify the executable file directory in it
 3. `mv sticker.service /usr/lib/systemd/system/sticker.service`
-4. `systemed start sticker`
+4. `systemectl start sticker`
 5. Done!
 
 # Notice
