@@ -1,9 +1,26 @@
 package bin
 
+/*
+  Copyright 2023 Malonan & 3JoB
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+*/
+
 import (
 	"time"
 
 	tele "github.com/3JoB/telebot"
+	"github.com/3JoB/telebot/pkg"
 	"github.com/goccy/go-json"
 	"github.com/spf13/cast"
 	"github.com/tidwall/gjson"
@@ -13,23 +30,29 @@ import (
 
 type Func struct{}
 
+type AdminList struct {
+	User struct {
+		ID int64 `json:"id"`
+	} `json:"user"`
+}
+
 func String(a any) string {
 	s, err := json.Marshal(&a)
 	if err != nil {
 		return ""
 	}
-	return cast.ToString(s)
+	return pkg.String(s)
 }
 
 func Int64Map(a string, x ...any) map[int64]int {
 	smp := make(map[int64]int)
-	json.Unmarshal([]byte(a), &smp)
+	json.Unmarshal(pkg.Bytes(a), &smp)
 	return smp
 }
 
 func StringMap(a string, x ...any) map[string]string {
 	smp := make(map[string]string)
-	json.Unmarshal([]byte(a), &smp)
+	json.Unmarshal(pkg.Bytes(a), &smp)
 	return smp
 }
 
@@ -78,7 +101,7 @@ func (*Func) Edit(c tele.Context, msg ...any) error {
 	return c.Edit(msg[0], &tele.SendOptions{ParseMode: tele.ModeHTML, DisableWebPagePreview: true})
 }
 
-//Pop-ups
+// Pop-ups
 func (*Func) Alert(c tele.Context, text string) error {
 	return c.Respond(&tele.CallbackResponse{
 		Text:      text,
@@ -86,7 +109,7 @@ func (*Func) Alert(c tele.Context, text string) error {
 	})
 }
 
-//Prompt information
+// Prompt information
 func (*Func) AlertNo(c tele.Context, text string) error {
 	return c.Respond(&tele.CallbackResponse{
 		Text:      text,
@@ -94,7 +117,7 @@ func (*Func) AlertNo(c tele.Context, text string) error {
 	})
 }
 
-//Get the list of group administrators
+// Get the list of group administrators
 func GetAdminList(c tele.Context) error {
 	var b []AdminList
 	m := map[string]int64{
@@ -104,9 +127,9 @@ func GetAdminList(c tele.Context) error {
 	if !gjson.GetBytes(d, "ok").Bool() {
 		return nil
 	}
-	json.Unmarshal([]byte(gjson.GetBytes(d, "result").String()), &b)
+	json.Unmarshal(pkg.Bytes(gjson.GetBytes(d, "result").String()), &b)
 	if len(b) == 0 {
-		fn.SA(c, 10,"Oh no....bot failed to fetch admin list....please check what happened....")
+		fn.SA(c, 10, "Oh no....bot failed to fetch admin list....please check what happened....")
 		return nil
 	}
 	admin := make(map[int64]int)

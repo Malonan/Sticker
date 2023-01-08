@@ -1,7 +1,7 @@
 cloud.google.com/go v0.26.0/go.mod h1:aQUYkXzVsufM+DwF1aE+0xfcU+56JwCaLick0ClmMTw=
 cloud.google.com/go v0.34.0/go.mod h1:aQUYkXzVsufM+DwF1aE+0xfcU+56JwCaLick0ClmMTw=
-github.com/3JoB/telebot v0.0.0-20230107120939-735d2ab280da h1:b4B8naahL2nwGqMF6ehZ0BiegRbybo42rd72tL5dwpI=
-github.com/3JoB/telebot v0.0.0-20230107120939-735d2ab280da/go.mod h1:KV20d3+6YA22MDQt9i1SIhZVZ3NE/mhQMnCi/ZOQM9g=
+github.com/3JoB/telebot v0.0.0-20230108071348-94aa646cde07 h1:2loxrndaptz+NGhaTPhHvdDJFrbIh21dK5aEiney6YQ=
+github.com/3JoB/telebot v0.0.0-20230108071348-94aa646cde07/go.mod h1:KV20d3+6YA22MDQt9i1SIhZVZ3NE/mhQMnCi/ZOQM9g=
 github.com/BurntSushi/toml v0.3.1 h1:WXkYYl6Yr3qBf1K79EBnL4mak0OimBfB0XUf9Vl28OQ=
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
 github.com/alecthomas/template v0.0.0-20160405071501-a0175ee3bccc/go.mod h1:LOuyumcjzFXgccqObfd/Ljyb9UuFJ6TxHnclSeseNhc=

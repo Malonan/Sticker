@@ -1,7 +1,7 @@
 package main
 
 import (
-	"sticker/include"
+	"sticker/cmd"
 	log "sticker/lib/liblog"
 )
 
@@ -10,5 +10,5 @@ func init() {
 }
 
 func main() {
-	include.Start()
+	cmd.Start()
 }

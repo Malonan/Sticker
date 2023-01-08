@@ -3,7 +3,7 @@ module sticker
 go 1.19
 
 require (
-	github.com/3JoB/telebot v0.0.0-20230107120939-735d2ab280da
+	github.com/3JoB/telebot v0.0.0-20230108071348-94aa646cde07
 	github.com/go-redis/redis/v9 v9.0.0-rc.2
 	github.com/goccy/go-json v0.10.0
 	github.com/knadh/koanf v1.4.5
