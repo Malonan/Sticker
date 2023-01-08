@@ -20,10 +20,9 @@ func init() {
 				Proxy: http.ProxyURL(ProxyURL),
 			},
 		}
-		goto END
+	} else {
+		httpClient = http.DefaultClient
 	}
-	httpClient = http.DefaultClient
-END:
 }
 
 func Client() *http.Client {
