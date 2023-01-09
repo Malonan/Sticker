@@ -38,6 +38,7 @@ func CommandRefresh(c tele.Context) error {
 		c.Send("What?")
 		return nil
 	}
+	c.Delete()
 	// If whitelisted groups are enabled
 	if F.Bool("whitelist_mode") {
 		// Stop serving non-whitelisted groups
@@ -66,6 +67,7 @@ func CommandSelectMode(c tele.Context) error {
 	if c.Chat().Type != "supergroup" {
 		return fn.SA(c, 12, "This command can only be used within a supergroup!!!")
 	}
+	c.Delete()
 	// If whitelisted groups are enabled
 	if F.Bool("whitelist_mode") {
 		// Stop serving non-whitelisted groups
