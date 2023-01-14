@@ -1,0 +1,18 @@
+all: |
+  @echo Compiling all versions
+
+linux: |
+  @env GOOS linux
+  @env CGO_ENABLED 0
+  @env GOARCH amd64
+  go build -ldflags "-s -w" -o ./bin/sticker_Linux_X86_64
+  @env GOARCH arm64
+  go build -ldflags "-s -w" -o ./bin/sticker_Linux_aarch64
+
+windows: |
+  @env GOOS windows
+  @env CGO_ENABLED 0
+  @env GOARCH amd64
+  go build -ldflags "-s -w" -o ./bin/sticker_Windows_X86_64
+  @env GOARCH arm64
+  go build -ldflags "-s -w" -o ./bin/sticker_Windows_aarch64
