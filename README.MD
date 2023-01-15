@@ -1,4 +1,6 @@
 # <center><strong>I Don't Like This Sticker</strong></center>
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FMalonan%2FSticker.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FMalonan%2FSticker?ref=badge_shield)
+
 
 <p align="center"><strong>Self-deployable, multi-group Telegram sticker set review bot<strong></p>
 
@@ -71,3 +73,5 @@ TON: `UQCKEwhmCtTBmFNwESxeEmb8Ij4hSAU1wFs_inPy3tBbLExf`
 
 # License
 This software is distributed under Apache-2.0 license.
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FMalonan%2FSticker.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FMalonan%2FSticker?ref=badge_large)
