@@ -1,5 +1,7 @@
 build.md
 sticker
+sticker.exe
 sticker.yml
-Sticker_Linux_X86_64.tar
+Sticker*.tar
 sticker.service
+bin
