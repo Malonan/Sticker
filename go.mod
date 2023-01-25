@@ -4,10 +4,10 @@ go 1.19
 
 require (
 	github.com/3JoB/telebot v0.0.0-20230108071348-94aa646cde07
-	github.com/go-redis/redis/v9 v9.0.0-rc.2
 	github.com/goccy/go-json v0.10.0
 	github.com/knadh/koanf v1.4.5
 	github.com/natefinch/lumberjack v2.0.0+incompatible
+	github.com/redis/go-redis/v9 v9.0.0-rc.4
 	github.com/sirupsen/logrus v1.9.0
 	github.com/spf13/cast v1.5.0
 	github.com/tidwall/gjson v1.14.4

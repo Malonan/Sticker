@@ -19,6 +19,7 @@ windows: |
   go build -ldflags "-s -w" -o ./bin/sticker_Windows_aarch64.exe
 
 all: |
-  @echo Compiling all versions
-  @cmd linux
-  @cmd windows
+  @env CGO_ENABLED 0
+  go build -ldflags "-s -w"
+  @download https://github.com/Malonan/Sticker/raw/Config/sticker.yml
+  @download wget https://github.com/Malonan/Sticker/raw/Config/sticker.service
