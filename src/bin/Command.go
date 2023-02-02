@@ -20,6 +20,7 @@ import (
 	"sticker/lib/libg/dbstr"
 
 	tele "github.com/3JoB/telebot"
+	tb "github.com/3JoB/ulib/telebot"
 	"github.com/spf13/cast"
 )
 
@@ -39,11 +40,12 @@ func CommandRefresh(c tele.Context) error {
 		return nil
 	}
 	c.Delete()
+	t := tb.New().SetContext(c)
 	// If whitelisted groups are enabled
 	if F.Bool("whitelist_mode") {
 		// Stop serving non-whitelisted groups
 		if WhiteList[c.Chat().ID] != 1 {
-			fn.S(c, "This group is not available for this function!!!")
+			t.Send("This group is not available for this function!!!")
 			// leave group
 			return c.Bot().Leave(c.Chat())
 		}
@@ -51,28 +53,30 @@ func CommandRefresh(c tele.Context) error {
 	admin := Int64Map(rd.Get(ctx, "sticker_Admin_"+cast.ToString(c.Chat().ID)).Result())
 	if len(admin) == 0 {
 		GetAdminList(c)
-		fn.SA(c, 10, "The current group management list is empty and is trying to get it.\nIf you can't get it, check that the bot has been granted administrator privileges.")
+		t.SetAutoDelete(10).Send("The current group management list is empty and is trying to get it.\nIf you can't get it, check that the bot has been granted administrator privileges.")
 		return nil
 	}
 	if admin[c.Sender().ID] != 1 {
-		fn.SA(c, 10, "This command is only available to supergroup administrators!!!")
+		t.SetAutoDelete(10).Send("This command is only available to supergroup administrators!!!")
 		return nil
 	}
-	fn.SA(c, 6, "Refreshing admin list...")
+	t.SetAutoDelete(10).Send("Refreshing admin list...")
 	return GetAdminList(c)
 }
 
 func CommandSelectMode(c tele.Context) error {
+	t := tb.New().SetContext(c)
 	// Check if the chat is a supergroup
 	if c.Chat().Type != "supergroup" {
-		return fn.SA(c, 12, "This command can only be used within a supergroup!!!")
+		t.SetAutoDelete(12).Send("This command can only be used within a supergroup!!!")
+		return nil
 	}
 	c.Delete()
 	// If whitelisted groups are enabled
 	if F.Bool("whitelist_mode") {
 		// Stop serving non-whitelisted groups
 		if WhiteList[c.Chat().ID] != 1 {
-			fn.S(c, "This group is not available for this function!!!")
+			t.Send("This group is not available for this function!!!")
 			// leave group
 			return c.Bot().Leave(c.Chat())
 		}
@@ -80,15 +84,18 @@ func CommandSelectMode(c tele.Context) error {
 	admin := Int64Map(rd.Get(ctx, "sticker_Admin_"+cast.ToString(c.Chat().ID)).Result())
 	// Prevent non-admins from operating the bot
 	if admin[c.Sender().ID] != 1 {
-		return fn.SA(c, 10, "This command is only available to supergroup administrators!!!")
+		t.SetAutoDelete(10).Send("This command is only available to supergroup administrators!!!")
+		return nil
 	}
 	modetype , _ := rd.Get(ctx, "sticker_Config_Mode_"+cast.ToString(c.Chat().ID)).Bool()
 	if modetype {
 		rd.Set(ctx, "sticker_Config_Mode_"+cast.ToString(c.Chat().ID), false, 0)
 		db.Updates(&dbstr.Config{Gid: c.Chat().ID, Modetype: false})
-		return fn.SA(c, 12, "Group sticker checking mode has been switched to blacklist mode!")
+		t.SetAutoDelete(12).Send("Group sticker checking mode has been switched to blacklist mode!")
+		return nil
 	}
 		rd.Set(ctx, "sticker_Config_Mode_"+cast.ToString(c.Chat().ID), true, 0)
 		db.Updates(&dbstr.Config{Gid: c.Chat().ID, Modetype: true})
-		return fn.SA(c, 12, "Group sticker checking mode has been switched to whitelist mode!")
+		t.SetAutoDelete(12).Send("Group sticker checking mode has been switched to whitelist mode!")
+		return nil
 }

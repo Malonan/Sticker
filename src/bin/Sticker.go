@@ -21,6 +21,8 @@ import (
 	tele "github.com/3JoB/telebot"
 	"github.com/spf13/cast"
 
+	"github.com/3JoB/ulib/json"
+	tb "github.com/3JoB/ulib/telebot"
 	"sticker/lib/libg/dbstr"
 )
 
@@ -30,15 +32,17 @@ func Add(g int64) {
 
 func CommandStickerBan(c tele.Context) error {
 	c.Delete()
+	t := tb.New().SetContext(c)
 	// Check if the chat is a supergroup
 	if c.Chat().Type != "supergroup" {
-		return fn.SA(c, 12, "This command can only be used within a supergroup!!!")
+		t.SetAutoDelete(12).Send("This command can only be used within a supergroup!!!")
+		return nil
 	}
 	// If whitelisted groups are enabled
 	if F.Bool("whitelist_mode") {
 		// Stop serving non-whitelisted groups
 		if WhiteList[c.Chat().ID] != 1 {
-			fn.S(c, "This group is not available for this function!!!")
+			t.Send("This group is not available for this function!!!")
 			// leave group
 			return c.Bot().Leave(c.Chat())
 		}
@@ -47,19 +51,23 @@ func CommandStickerBan(c tele.Context) error {
 	admin := Int64Map(rd.Get(ctx, "sticker_Admin_"+cast.ToString(c.Chat().ID)).Result())
 	// Prevent non-admins from operating the bot
 	if admin[c.Sender().ID] != 1 {
-		return fn.SA(c, 10, "This command is only available to supergroup administrators!!!")
+		t.SetAutoDelete(10).Send("This command is only available to supergroup administrators!!!")
+		return nil
 	}
 	// Must reply to a message with command
 	if !c.Message().IsReply() {
-		return fn.SA(c, 10, "Please use this command to reply to a message!!!")
+		t.SetAutoDelete(10).Send("Please use this command to reply to a message!!!")
+		return nil
 	}
 	// If the message object is not a sticker
 	if c.Message().ReplyTo.Sticker == nil {
-		return fn.SA(c, 12, "The selected object must be a sticker!!!")
+		t.SetAutoDelete(12).Send("The selected object must be a sticker!!!")
+		return nil
 	}
 	// If the message object is not a sticker
 	if c.Message().ReplyTo.Sticker.SetName == "" {
-		return fn.SA(c, 12, "The selected object must be a sticker!!!")
+		t.SetAutoDelete(12).Send("The selected object must be a sticker!!!")
+		return nil
 	}
 
 	// I hate the map[string]string bug in 1.20.
@@ -68,14 +76,16 @@ func CommandStickerBan(c tele.Context) error {
 	rule := StringMap(rd.Get(ctx, "sticker_Rule_"+cast.ToString(c.Chat().ID)).Result())
 	if rule[c.Message().ReplyTo.Sticker.SetName] == "" {
 		rule[c.Message().ReplyTo.Sticker.SetName] = "v"
-		rules := String(rule)
+		rules := json.Marshal(&rule).String()
 		rd.Set(ctx, "sticker_Rule_"+cast.ToString(c.Chat().ID), rules, 0)
 		db.Updates(&dbstr.Config{Gid: c.Chat().ID, Data: rules})
-		return fn.SA(c, 8, "I already remember you!!!")
+		t.SetAutoDelete(10).Send("I already remember you!!!")
+		return nil
 	}
 	delete(rule, c.Message().ReplyTo.Sticker.SetName)
-	rules := String(rule)
+	rules := json.Marshal(&rule).String()
 	db.Updates(&dbstr.Config{Gid: c.Chat().ID, Data: rules})
 	rd.Set(ctx, "sticker_Rule_"+cast.ToString(c.Chat().ID), rules, 0)
-	return fn.SA(c, 12, "my memory of it has faded...")
+	t.SetAutoDelete(10).Send("my memory of it has faded...")
+	return nil
 }

@@ -16,9 +16,9 @@ package bin
   limitations under the License.
 */
 
-
 import (
 	tele "github.com/3JoB/telebot"
+	tb "github.com/3JoB/ulib/telebot"
 	"github.com/spf13/cast"
 )
 
@@ -65,9 +65,10 @@ func ServiceJoinToGroup(c tele.Context) error {
 	if c.Chat().Type != "supergroup" {
 		return nil
 	}
+	t := tb.New().SetContext(c)
 	msg := `Sticker admins have joined the group, are you ready to be filled with my wrath? (just kidding)
 You can deploy an identical instance at https://github.com/Malonan/Sticker, or you can learn how to use this bot.`
-	fn.S(c, msg)
+	t.Send(msg)
 	Add(c.Chat().ID)
 	return GetAdminList(c)
 }

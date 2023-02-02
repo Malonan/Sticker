@@ -32,7 +32,6 @@ var (
 	rd = c.Do()       // CacheDB
 	db = libg.GetDB() // DataBase
 	F  = libF.F()     // Config
-	fn Func           // Util
 
 	ctx = context.Background()
 
