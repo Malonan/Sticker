@@ -1,10 +1,10 @@
 module sticker
 
-go 1.19
+go 1.20
 
 require (
 	github.com/3JoB/telebot v0.0.0-20230207090513-f455f6c7aae9
-	github.com/3JoB/ulib v0.0.9
+	github.com/3JoB/ulib v0.0.10-3
 	github.com/knadh/koanf v1.5.0
 	github.com/natefinch/lumberjack v2.0.0+incompatible
 	github.com/redis/go-redis/v9 v9.0.2
