@@ -3,8 +3,8 @@ module sticker
 go 1.19
 
 require (
-	github.com/3JoB/telebot v0.0.0-20230115124831-797424b7653c
-	github.com/3JoB/ulib v0.0.4
+	github.com/3JoB/telebot v0.0.0-20230206093018-d4bc9140380f
+	github.com/3JoB/ulib v0.0.6
 	github.com/goccy/go-json v0.10.0
 	github.com/knadh/koanf v1.5.0
 	github.com/natefinch/lumberjack v2.0.0+incompatible
@@ -22,6 +22,7 @@ require (
 	github.com/fsnotify/fsnotify v1.6.0 // indirect
 	github.com/go-sql-driver/mysql v1.7.0 // indirect
 	github.com/goccy/go-reflect v1.2.0 // indirect
+	github.com/grafana/regexp v0.0.0-20221122212121-6b5c0a4cb7fd // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.5 // indirect
 	github.com/mitchellh/copystructure v1.2.0 // indirect

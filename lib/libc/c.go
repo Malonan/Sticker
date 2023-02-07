@@ -25,8 +25,8 @@ import (
 )
 
 var (
-	rd *redis.Client
-	kc = libF.F
+	rd  *redis.Client
+	kc  = libF.F
 	ctx = context.Background()
 )
 

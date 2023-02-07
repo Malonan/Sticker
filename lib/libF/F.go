@@ -25,10 +25,13 @@ import (
 // Global koanf instance. Use "." as the key path delimiter. This can be "/" or any character.
 var k = koanf.New(".")
 
-func F() *koanf.Koanf {
+func init() {
 	// Load YAML config and merge into the previously loaded config (because we can).
 	if err := k.Load(file.Provider("sticker.yml"), yaml.Parser()); err != nil {
 		panic(err)
 	}
+}
+
+func F() *koanf.Koanf {
 	return k
 }

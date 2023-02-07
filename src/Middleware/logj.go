@@ -19,13 +19,11 @@ package Middleware
 import (
 	"path"
 
-	"github.com/goccy/go-json"
-
-	"github.com/natefinch/lumberjack"
-	"github.com/sirupsen/logrus"
-
 	tele "github.com/3JoB/telebot"
 	"github.com/3JoB/telebot/pkg"
+	"github.com/goccy/go-json"
+	"github.com/natefinch/lumberjack"
+	"github.com/sirupsen/logrus"
 )
 
 var (

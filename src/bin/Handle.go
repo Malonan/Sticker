@@ -16,7 +16,6 @@ package bin
   limitations under the License.
 */
 
-
 import (
 	tele "github.com/3JoB/telebot"
 )
