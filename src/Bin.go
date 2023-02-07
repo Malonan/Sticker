@@ -1,4 +1,4 @@
-package bin
+package src
 
 /*
   Copyright 2023 Malonan & 3JoB

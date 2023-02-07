@@ -1,4 +1,4 @@
-package bin
+package src
 
 /*
   Copyright 2023 Malonan & 3JoB
@@ -19,7 +19,7 @@ package bin
 import (
 	tele "github.com/3JoB/telebot"
 	"github.com/3JoB/ulib/json"
-	tb "github.com/3JoB/ulib/telebot"
+	tb "github.com/3JoB/ulib/telebot/utils"
 	"github.com/spf13/cast"
 
 	"sticker/lib/libg/dbstr"

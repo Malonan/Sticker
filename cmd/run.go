@@ -22,12 +22,13 @@ import (
 
 	tele "github.com/3JoB/telebot"
 	"github.com/3JoB/telebot/middleware"
+	tb "github.com/3JoB/ulib/telebot/Bot"
+	tbmw "github.com/3JoB/ulib/telebot/middleware"
 
 	"sticker/lib/libF"
 	fn "sticker/lib/libfn"
 	log "sticker/lib/liblog"
-	m "sticker/src/Middleware"
-	"sticker/src/bin"
+	"sticker/src"
 )
 
 var F = libF.F()
@@ -39,24 +40,18 @@ func T() string {
 func Start() {
 	fmt.Println(T() + " Ready to start.....")
 	fmt.Println(T() + " Configure robot information...")
-	pref := tele.Settings{
-		Token:   F.String("Key"),
-		Poller:  &tele.LongPoller{Timeout: 10 * time.Second},
-		OnError: func(err error, ctx tele.Context) { log.Use().Error(err.Error()) },
-		Client:  fn.Client(),
-	}
+
+	t := tb.New().
+		SetClient(fn.Client()).
+		SetError(func(err error, ctx tele.Context) { log.Use().Error(err.Error()) }).SetKey(F.String("Key"))
+
 	fmt.Println(T() + " Registering...")
-	b, err := tele.NewBot(pref)
-	if err != nil {
-		fmt.Println(T() + " Registration failed, please check the log.")
-		log.Use().Println(err.Error())
-		return
-	}
-	b.RemoveWebhook(true)
-	b.Use(middleware.Recover())
-	// b.Use(middleware.AutoRespond())
-	b.Use(m.Logger())
-	bin.Handle(b)
-	fmt.Println(T() + " The robot is running on @" + b.Me.Username)
+	b := t.NewBot()
+	b.RemoveWebhook()
+	b.Middleware(middleware.Recover())
+	// b.Middleware(middleware.AutoRespond())
+	b.Middleware(tbmw.Logger(&tbmw.LogSettings{Path: "./log/", FileName: "sticker-log"}))
+	src.Handle(b.B)
+	fmt.Println(T() + " The robot is running on @" + b.Me().Username)
 	b.Start()
 }
