@@ -9,7 +9,6 @@
 <p align="center"><a href="https://github.com/Malonan/Sticker/releases">Download</a> | <a href="https://github.com/Malonan/Sticker/tree/master/wiki">Wiki</a> | <a href="https://github.com/Malonan/Sticker/issues">Issues</a> | <a href="#notice">Notice</a> | <a href="#donate">Donate</a> </p>
 
 
-
 <br>
 
 Example: <a href="https://t.me/IDontLikeThisStickerBot">@IDontLikeThisStickerBot</a>
