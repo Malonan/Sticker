@@ -38,7 +38,7 @@ func ServiceSticker(c tele.Context) error {
 	admin := AdminMap(rd.Get(ctx, "sticker_Admin_"+cast.ToString(c.Chat().ID)).Result())
 
 	// Robot Permissions Check
-	if admin[c.Sender().ID].User.ID == 0 {
+	if admin[c.Bot().Me.ID].User.ID == 0 {
 		return nil
 	}
 	if !admin[c.Bot().Me.ID].CanDeleteMessages {

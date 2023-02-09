@@ -32,34 +32,8 @@ func Add(g int64) {
 func CommandStickerBan(c tele.Context) error {
 	c.Delete()
 	t := tb.New().SetContext(c)
-	// Check if the chat is a supergroup
-	if c.Chat().Type != "supergroup" {
-		t.SetAutoDelete(12).Send("This command can only be used within a supergroup!!!")
-		return nil
-	}
-	// If whitelisted groups are enabled
-	if F.Bool("whitelist_mode") {
-		// Stop serving non-whitelisted groups
-		if WhiteList[c.Chat().ID] != 1 {
-			t.Send("This group is not available for this function!!!")
-			// leave group
-			return c.Bot().Leave(c.Chat())
-		}
-	}
 
-	admin := AdminMap(rd.Get(ctx, "sticker_Admin_"+cast.ToString(c.Chat().ID)).Result())
-	// Prevent non-admins from operating the bot
-	if admin[c.Bot().Me.ID].User.ID == 0 {
-		t.SetAutoDelete(10).Send("The robot is not a group administrator, the operation is not available.")
-		return nil
-	}
-	if !admin[c.Bot().Me.ID].CanDeleteMessages {
-		t.SetAutoDelete(10).Send("Insufficient permissions for the robot to operate.")
-		return nil
-	}
-	// Prevent non-admins from operating the bot
-	if admin[c.Sender().ID].User.ID == 0 {
-		t.SetAutoDelete(10).Send("This command is only available to supergroup administrators!!!")
+	if err:= packet1(t); err != nil {
 		return nil
 	}
 

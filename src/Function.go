@@ -17,6 +17,8 @@ package src
 */
 
 import (
+	"errors"
+
 	tele "github.com/3JoB/telebot"
 	"github.com/3JoB/ulib/json"
 	tb "github.com/3JoB/ulib/telebot/utils"
@@ -49,6 +51,56 @@ func AdminMap(a string, x ...any) AdminRule{
 	info := make(AdminRule)
 	json.UnmarshalString(a, &info)
 	return info
+}
+
+var (
+	errs = errors.New("pe")
+)
+
+func packet1(t *tb.Use, ref ...any) error {
+	// Check if the chat is a supergroup
+	if t.Ctx.Chat().Type != "supergroup" {
+		t.SetAutoDelete(12).Send("This command can only be used within a supergroup!!!")
+		return errs
+	}
+	// If whitelisted groups are enabled
+	if F.Bool("whitelist_mode") {
+		// Stop serving non-whitelisted groups
+		if WhiteList[t.Ctx.Chat().ID] != 1 {
+			t.Send("This group is not available for this function!!!")
+			// leave group
+			t.Ctx.Bot().Leave(t.Ctx.Chat())
+			return errs
+		}
+	}
+
+	admin := AdminMap(rd.Get(ctx, "sticker_Admin_"+cast.ToString(t.Ctx.Chat().ID)).Result())
+	if len(ref) != 0 {
+		if len(admin) == 0 {
+			if err := GetAdminList(t.Ctx); err != nil {
+				t.SetAutoDelete(10).Send(err.Error())
+				return errs
+			}
+			t.SetAutoDelete(10).Send("The current group management list is empty and is trying to get it.\nIf you can't get it, check that the bot has been granted administrator privileges.")
+			return errs
+		}
+	}
+
+	// Prevent non-admins from operating the bot
+	if admin[t.Ctx.Bot().Me.ID].User.ID == 0 {
+		t.SetAutoDelete(10).Send("The robot is not a group administrator, the operation is not available.")
+		return errs
+	}
+	if !admin[t.Ctx.Bot().Me.ID].CanDeleteMessages {
+		t.SetAutoDelete(10).Send("Insufficient permissions for the robot to operate.")
+		return errs
+	}
+	// Prevent non-admins from operating the bot
+	if admin[t.Ctx.Sender().ID].User.ID == 0 {
+		t.SetAutoDelete(10).Send("This command is only available to supergroup administrators!!!")
+		return errs
+	}
+	return nil
 }
 
 // Send files with tele.Bot
