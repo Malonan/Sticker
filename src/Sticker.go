@@ -33,7 +33,7 @@ func CommandStickerBan(c tele.Context) error {
 	c.Delete()
 	t := tb.New().SetContext(c)
 
-	if err:= packet1(t); err != nil {
+	if err := packet1(t); err != nil {
 		return nil
 	}
 

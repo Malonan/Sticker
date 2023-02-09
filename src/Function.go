@@ -47,7 +47,7 @@ func StringMap(a string, x ...any) map[string]string {
 
 type AdminRule map[int64]tb.AdminInfo
 
-func AdminMap(a string, x ...any) AdminRule{
+func AdminMap(a string, x ...any) AdminRule {
 	info := make(AdminRule)
 	json.UnmarshalString(a, &info)
 	return info
