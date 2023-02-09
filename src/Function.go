@@ -54,7 +54,7 @@ func AdminMap(a string, x ...any) AdminRule {
 }
 
 var (
-	errs = errors.New("pe")
+	errs = errors.New("p")
 )
 
 func packet1(t *tb.Use, ref ...any) error {
@@ -106,14 +106,6 @@ func packet1(t *tb.Use, ref ...any) error {
 // Send files with tele.Bot
 /*func (*Func) FS(c tele.Context, u int64, msg any) (*tele.Message, error) {
 	return c.Bot().Send(tele.ChatID(u), msg)
-}
-
-// Send messages with tele.Bot
-func (*Func) CS(c tele.Context, u int64, msg ...any) (*tele.Message, error) {
-	if len(msg) == 2 {
-		return c.Bot().Send(tele.ChatID(u), msg[0], &tele.SendOptions{ParseMode: tele.ModeHTML, DisableWebPagePreview: true}, msg[1])
-	}
-	return c.Bot().Send(tele.ChatID(u), msg[0], &tele.SendOptions{ParseMode: tele.ModeHTML, DisableWebPagePreview: true})
 }
 
 // Edit Message
