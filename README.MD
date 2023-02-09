@@ -40,7 +40,7 @@ Example: <a href="https://t.me/IDontLikeThisStickerBot">@IDontLikeThisStickerBot
 
 # Install
 
-1. [Download](https://github.com/Malonan/Sticker/releases) archive package. (Only Linux X86_64 builds provided)
+1. [Download](https://github.com/Malonan/Sticker/releases) archive package.
 2. Unzip it to any folder.
 3. `wget https://github.com/Malonan/Sticker/raw/Config/sticker.yml` -- Download configuration file, then modify it.
 4. [Configure persistent services](#persistent-service) (optional)
