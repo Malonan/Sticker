@@ -5,12 +5,19 @@
         "dbstr",
         "dialector",
         "Dont",
+        "Ewhm",
         "gmake",
         "gorm",
+        "libfn",
         "libg",
         "liblog",
+        "Malonan",
         "supergroup",
+        "systemectl",
         "tbmw",
-        "tele"
+        "tele",
+        "telebot",
+        "ulib",
+        "UQCK"
     ]
 }
