@@ -2,7 +2,7 @@ package main
 
 import (
 	"sticker/cmd"
-	log "sticker/lib/liblog"
+	"sticker/lib/log"
 )
 
 func init() {
