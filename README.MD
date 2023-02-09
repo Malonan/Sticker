@@ -2,7 +2,7 @@
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FMalonan%2FSticker.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FMalonan%2FSticker?ref=badge_shield)
 
 
-<p align="center"><strong>Self-deployable, multi-group Telegram sticker set review bot<strong></p>
+<p align="center"><strong>Self-deployable, a Telegram group sticker set management robot that supports multi-group use.<strong></p>
 
 
 <br>
