@@ -53,6 +53,12 @@ func CommandStickerBan(c tele.Context) error {
 		t.SetAutoDelete(10).Send("This command is only available to supergroup administrators!!!")
 		return nil
 	}
+
+	// Robot Permissions Check
+	if admin[c.Bot().Me.ID] != 1 {
+		t.SetAutoDelete(10).Send("Insufficient rights for the robot, please grant administrator rights to the robot.")
+		return nil
+	}
 	// Must reply to a message with command
 	if !c.Message().IsReply() {
 		t.SetAutoDelete(10).Send("Please use this command to reply to a message!!!")

@@ -21,7 +21,6 @@ import (
 	"github.com/3JoB/ulib/json"
 	tb "github.com/3JoB/ulib/telebot/utils"
 	"github.com/spf13/cast"
-	"github.com/tidwall/gjson"
 
 	"sticker/lib/libg/dbstr"
 )
@@ -67,27 +66,14 @@ func (*Func) Edit(c tele.Context, msg ...any) error {
 
 // Get the list of group administrators
 func GetAdminList(c tele.Context) error {
-	var b []AdminList
-	m := map[string]int64{
-		"chat_id": c.Chat().ID,
-	}
-	t := tb.New().SetContext(c)
-	d, _ := c.Bot().Raw("getChatAdministrators", m)
-	if !gjson.GetBytes(d, "ok").Bool() {
+	t, err := tb.New().SetContext(c).SetChatID(c.Chat().ID).GetAdminList()
+	if err != nil {
+		tb.New().SetContext(c).SetAutoDelete(10).Send(err.Error())
 		return nil
 	}
-	json.UnmarshalString(gjson.GetBytes(d, "result").String(), &b)
-	if len(b) == 0 {
-		t.SetAutoDelete(10).Send("Oh no....bot failed to fetch admin list....please check what happened....")
-		return nil
-	}
-	admin := make(map[int64]int)
-	for _, i := range b {
-		admin[i.User.ID] = 1
-	}
-	rd.Set(ctx, "sticker_Admin_"+cast.ToString(c.Chat().ID), json.Marshal(&admin).String(), 0)
-	db.Updates(&dbstr.Config{Gid: c.Chat().ID, Admin: json.Marshal(&admin).String()})
-	t.SetAutoDelete(10).Send("The admin list has been refreshed.")
+	rd.Set(ctx, "sticker_Admin_"+cast.ToString(c.Chat().ID), json.Marshal(&t).String(), 0)
+	db.Updates(&dbstr.Config{Gid: c.Chat().ID, Admin: json.Marshal(&t).String()})
+	tb.New().SetContext(c).SetAutoDelete(10).Send("The admin list has been refreshed.")
 	return nil
 }
 
