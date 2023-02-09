@@ -6,21 +6,26 @@
 
 
 <br>
-<p align="center"><a href="https://github.com/Malonan/Sticker/releases">Download</a> | <a href="https://github.com/Malonan/Sticker/tree/master/wiki">Wiki</a> | <a href="https://github.com/Malonan/Sticker/issues">Issues</a> | [Donate](#donate) | [Notice](#notice) </p>
+<p align="center"><a href="https://github.com/Malonan/Sticker/releases">Download</a> | <a href="https://github.com/Malonan/Sticker/tree/master/wiki">Wiki</a> | <a href="https://github.com/Malonan/Sticker/issues">Issues</a> | <a href="#notice">Notice</a> | <a href="#donate">Donate</a> </p>
+
+
 
 <br>
 
 Example: <a href="https://t.me/IDontLikeThisStickerBot">@IDontLikeThisStickerBot</a>
 
+
 <br>
 
 # Requirement
+
 1. Mysql5.7+ / MariaDB 10.4+
 2. Redis6+ (Suggest Redis7+)
 
 <br>
 
 # Install
+
 1. [Download](https://github.com/Malonan/Sticker/releases) archive package. (Only Linux X86_64 builds provided)
 2. Unzip it to any folder.
 3. `wget https://github.com/Malonan/Sticker/raw/Config/sticker.yml` -- Download configuration file, then modify it.
