@@ -56,8 +56,10 @@ git, wget, GNU Make, golang(must 1.19.x), then no more
 
 # Notice
 
-1. Do not use Golang1.20RC version to compile, it has a String Map bug, which will cause the program to fail to run.
-2. Issues only deals with Debian11 issues, and please Google to solve the rest
+1. Do not use any RC version of Golang.
+2. Bots require full admin privileges before being enabled for the current group.
+3. Privacy Mode must be turned off for bots (at BotFather).
+4. Issues only deals with Debian11 issues, and please Google to solve the rest
 
 
 <br>
