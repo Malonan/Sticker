@@ -1,4 +1,4 @@
-package libF
+package db
 
 /*
   Copyright 2023 Malonan & 3JoB
@@ -17,21 +17,27 @@ package libF
 */
 
 import (
-	"github.com/knadh/koanf"
-	"github.com/knadh/koanf/parsers/yaml"
-	"github.com/knadh/koanf/providers/file"
+	"context"
+
+	"github.com/redis/go-redis/v9"
 )
 
-// Global koanf instance. Use "." as the key path delimiter. This can be "/" or any character.
-var k = koanf.New(".")
+var (
+	rd  *redis.Client
+	ctx = context.Background()
+)
 
 func init() {
-	// Load YAML config and merge into the previously loaded config (because we can).
-	if err := k.Load(file.Provider("sticker.yml"), yaml.Parser()); err != nil {
+	rd = redis.NewClient(&redis.Options{
+		Addr:     kc().String("cache.addr"),
+		Password: kc().String("cache.pwd"), // no password set
+		DB:       kc().Int("cache.db"),     // use default DB
+	})
+	if err := rd.Conn().Ping(ctx).Err(); err != nil {
 		panic(err)
 	}
 }
 
-func F() *koanf.Koanf {
-	return k
+func GetRedis() *redis.Client {
+	return rd
 }

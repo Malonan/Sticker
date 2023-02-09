@@ -22,11 +22,11 @@ import (
 	tb "github.com/3JoB/ulib/telebot/utils"
 	"github.com/spf13/cast"
 
-	"sticker/lib/libg/dbstr"
+	"sticker/lib/db/dbstr"
 )
 
 func Add(g int64) {
-	db.Create(&dbstr.Config{Gid: g, Data: "{}", Admin: "{}", Modetype: false})
+	dbs.Create(&dbstr.Config{Gid: g, Data: "{}", Admin: "{}", Modetype: false})
 }
 
 func CommandStickerBan(c tele.Context) error {
@@ -61,13 +61,13 @@ func CommandStickerBan(c tele.Context) error {
 		rule[c.Message().ReplyTo.Sticker.SetName] = "v"
 		rules := json.Marshal(&rule).String()
 		rd.Set(ctx, "sticker_Rule_"+cast.ToString(c.Chat().ID), rules, 0)
-		db.Updates(&dbstr.Config{Gid: c.Chat().ID, Data: rules})
+		dbs.Updates(&dbstr.Config{Gid: c.Chat().ID, Data: rules})
 		t.SetAutoDelete(10).Send("I already remember you!!!")
 		return nil
 	}
 	delete(rule, c.Message().ReplyTo.Sticker.SetName)
 	rules := json.Marshal(&rule).String()
-	db.Updates(&dbstr.Config{Gid: c.Chat().ID, Data: rules})
+	dbs.Updates(&dbstr.Config{Gid: c.Chat().ID, Data: rules})
 	rd.Set(ctx, "sticker_Rule_"+cast.ToString(c.Chat().ID), rules, 0)
 	t.SetAutoDelete(10).Send("my memory of it has faded...")
 	return nil

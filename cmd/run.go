@@ -25,13 +25,13 @@ import (
 	tb "github.com/3JoB/ulib/telebot/Bot"
 	tbmw "github.com/3JoB/ulib/telebot/middleware"
 
-	"sticker/lib/libF"
+	"sticker/lib/config"
 	fn "sticker/lib/libfn"
-	log "sticker/lib/liblog"
+	"sticker/lib/log"
 	"sticker/src"
 )
 
-var F = libF.F()
+var F = config.F()
 
 func T() string {
 	return "[Runtime/" + time.Now().UTC().Format("2006-01-02 15:04:05") + "]"

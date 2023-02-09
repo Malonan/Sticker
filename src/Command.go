@@ -21,7 +21,7 @@ import (
 	tb "github.com/3JoB/ulib/telebot/utils"
 	"github.com/spf13/cast"
 
-	"sticker/lib/libg/dbstr"
+	"sticker/lib/db/dbstr"
 )
 
 func CommandStart(c tele.Context) error {
@@ -63,12 +63,12 @@ func CommandSelectMode(c tele.Context) error {
 	modetype, _ := rd.Get(ctx, "sticker_Config_Mode_"+cast.ToString(c.Chat().ID)).Bool()
 	if modetype {
 		rd.Set(ctx, "sticker_Config_Mode_"+cast.ToString(c.Chat().ID), false, 0)
-		db.Select("Modetype").Updates(&dbstr.Config{Gid: c.Chat().ID, Modetype: false})
+		dbs.Select("Modetype").Updates(&dbstr.Config{Gid: c.Chat().ID, Modetype: false})
 		t.SetAutoDelete(12).Send("Group sticker checking mode has been switched to blacklist mode!")
 		return nil
 	}
 	rd.Set(ctx, "sticker_Config_Mode_"+cast.ToString(c.Chat().ID), true, 0)
-	db.Select("Modetype").Updates(&dbstr.Config{Gid: c.Chat().ID, Modetype: true})
+	dbs.Select("Modetype").Updates(&dbstr.Config{Gid: c.Chat().ID, Modetype: true})
 	t.SetAutoDelete(12).Send("Group sticker checking mode has been switched to whitelist mode!")
 	return nil
 }

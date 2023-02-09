@@ -24,7 +24,7 @@ import (
 	tb "github.com/3JoB/ulib/telebot/utils"
 	"github.com/spf13/cast"
 
-	"sticker/lib/libg/dbstr"
+	"sticker/lib/db/dbstr"
 )
 
 type AdminList struct {
@@ -131,7 +131,7 @@ func GetAdminList(c tele.Context) error {
 		return err
 	}
 	rd.Set(ctx, "sticker_Admin_"+cast.ToString(c.Chat().ID), json.Marshal(&t).String(), 0)
-	db.Updates(&dbstr.Config{Gid: c.Chat().ID, Admin: json.Marshal(&t).String()})
+	dbs.Updates(&dbstr.Config{Gid: c.Chat().ID, Admin: json.Marshal(&t).String()})
 	tb.New().SetContext(c).SetAutoDelete(10).Send("The admin list has been refreshed.")
 	return nil
 }

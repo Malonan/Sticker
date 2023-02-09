@@ -21,16 +21,15 @@ import (
 
 	"github.com/spf13/cast"
 
-	"sticker/lib/libF"
-	c "sticker/lib/libc"
-	"sticker/lib/libg"
-	"sticker/lib/libg/dbstr"
+	"sticker/lib/config"
+	"sticker/lib/db"
+	"sticker/lib/db/dbstr"
 )
 
 var (
-	rd = c.Do()       // CacheDB
-	db = libg.GetDB() // DataBase
-	F  = libF.F()     // Config
+	rd  = db.GetRedis() // CacheDB
+	dbs = db.GetDB()    // DataBase
+	F   = config.F()    // Config
 
 	ctx = context.Background()
 
@@ -45,7 +44,7 @@ func init() {
 }
 
 func Init() {
-	db.AutoMigrate(&dbstr.Config{})
+	dbs.AutoMigrate(&dbstr.Config{})
 
 	// Initialize the list of super administrators
 	for _, r := range F.Int64s("admin") {
@@ -63,7 +62,7 @@ func Init() {
 		config []dbstr.Config
 	)
 
-	db.Find(&config)
+	dbs.Find(&config)
 
 	/*Store database content in Redis
 

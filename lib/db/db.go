@@ -1,4 +1,4 @@
-package libg
+package db
 
 /*
   Copyright 2023 Malonan & 3JoB
@@ -24,13 +24,13 @@ import (
 	"gorm.io/gorm/logger"
 	"gorm.io/gorm/schema"
 
-	"sticker/lib/libF"
-	log "sticker/lib/liblog"
+	"sticker/lib/config"
+	log "sticker/lib/log"
 )
 
 var (
 	db *gorm.DB
-	kc = libF.F
+	kc = config.F
 )
 
 func init() {
