@@ -1,6 +1,21 @@
 # <center><strong>I Don't Like This Sticker</strong></center>
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FMalonan%2FSticker.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FMalonan%2FSticker?ref=badge_shield)
+ 
+<br>
 
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FMalonan%2FSticker.svg?type=small)](https://app.fossa.com/projects/git%2Bgithub.com%2FMalonan%2FSticker?ref=badge_smail)
+![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/Malonan/Sticker?label=Go%20Version&style=flat-square)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/Malonan/Sticker?label=Release%20Version&style=flat-square)](https://github.com/Malonan/Sticker/release)
+[![Apache-2.0](https://img.shields.io/github/license/Malonan/Sticker?style=flat-square)](https://github.com/Malonan/Sticker/blob/master/LICENSE)
+
+[![GitHub issues](https://img.shields.io/github/issues/Malonan/Sticker?label=Sticker%20Issues&style=flat-square)](https://github.com/Malonan/Sticker/issues)
+[![GitHub Repo stars](https://img.shields.io/github/stars/Malonan/Sticker?label=Stars&style=flat-square)](https://github.com/Malonan/Sticker/stargazers)
+![GitHub release (latest by date)](https://img.shields.io/github/downloads/Malonan/Sticker/latest/total?label=Downloads%40Latest&style=flat-square)
+![GitHub repo size](https://img.shields.io/github/repo-size/Malonan/Sticker?style=flat-square)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/Malonan/Sticker?style=flat-square)
+
+<br>
+
+---
 
 <p align="center"><strong>Self-deployable, a Telegram group sticker set management robot that supports multi-group use.<strong></p>
 
