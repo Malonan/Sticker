@@ -50,7 +50,7 @@ func CommandRefresh(c tele.Context) error {
 			return c.Bot().Leave(c.Chat())
 		}
 	}
-	admin := Int64Map(rd.Get(ctx, "sticker_Admin_"+cast.ToString(c.Chat().ID)).Result())
+	admin := AdminMap(rd.Get(ctx, "sticker_Admin_"+cast.ToString(c.Chat().ID)).Result())
 	if len(admin) == 0 {
 		if err := GetAdminList(c); err != nil {
 			t.SetAutoDelete(10).Send(err.Error())
@@ -59,12 +59,25 @@ func CommandRefresh(c tele.Context) error {
 		t.SetAutoDelete(10).Send("The current group management list is empty and is trying to get it.\nIf you can't get it, check that the bot has been granted administrator privileges.")
 		return nil
 	}
-	if admin[c.Sender().ID] != 1 {
+	// Prevent non-admins from operating the bot
+	if admin[c.Bot().Me.ID].User.ID == 0 {
+		t.SetAutoDelete(10).Send("The robot is not a group administrator, the operation is not available.")
+		return nil
+	}
+	if !admin[c.Bot().Me.ID].CanDeleteMessages {
+		t.SetAutoDelete(10).Send("Insufficient permissions for the robot to operate.")
+		return nil
+	}
+	// Prevent non-admins from operating the bot
+	if admin[c.Sender().ID].User.ID == 0 {
 		t.SetAutoDelete(10).Send("This command is only available to supergroup administrators!!!")
 		return nil
 	}
 	t.SetAutoDelete(10).Send("Refreshing admin list...")
-	return GetAdminList(c)
+	if err := GetAdminList(c); err != nil {
+		t.SetAutoDelete(12).Send(err.Error())
+	}
+	return nil
 }
 
 func CommandSelectMode(c tele.Context) error {
@@ -84,9 +97,18 @@ func CommandSelectMode(c tele.Context) error {
 			return c.Bot().Leave(c.Chat())
 		}
 	}
-	admin := Int64Map(rd.Get(ctx, "sticker_Admin_"+cast.ToString(c.Chat().ID)).Result())
+	admin := AdminMap(rd.Get(ctx, "sticker_Admin_"+cast.ToString(c.Chat().ID)).Result())
 	// Prevent non-admins from operating the bot
-	if admin[c.Sender().ID] != 1 {
+	if admin[c.Bot().Me.ID].User.ID == 0 {
+		t.SetAutoDelete(10).Send("The robot is not a group administrator, the operation is not available.")
+		return nil
+	}
+	if !admin[c.Bot().Me.ID].CanDeleteMessages {
+		t.SetAutoDelete(10).Send("Insufficient permissions for the robot to operate.")
+		return nil
+	}
+	// Prevent non-admins from operating the bot
+	if admin[c.Sender().ID].User.ID == 0 {
 		t.SetAutoDelete(10).Send("This command is only available to supergroup administrators!!!")
 		return nil
 	}

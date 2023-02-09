@@ -47,16 +47,19 @@ func CommandStickerBan(c tele.Context) error {
 		}
 	}
 
-	admin := Int64Map(rd.Get(ctx, "sticker_Admin_"+cast.ToString(c.Chat().ID)).Result())
+	admin := AdminMap(rd.Get(ctx, "sticker_Admin_"+cast.ToString(c.Chat().ID)).Result())
 	// Prevent non-admins from operating the bot
-	if admin[c.Sender().ID] != 1 {
-		t.SetAutoDelete(10).Send("This command is only available to supergroup administrators!!!")
+	if admin[c.Bot().Me.ID].User.ID == 0 {
+		t.SetAutoDelete(10).Send("The robot is not a group administrator, the operation is not available.")
 		return nil
 	}
-
-	// Robot Permissions Check
-	if admin[c.Bot().Me.ID] != 1 {
-		t.SetAutoDelete(10).Send("Insufficient rights for the robot, please grant administrator rights to the robot.")
+	if !admin[c.Bot().Me.ID].CanDeleteMessages {
+		t.SetAutoDelete(10).Send("Insufficient permissions for the robot to operate.")
+		return nil
+	}
+	// Prevent non-admins from operating the bot
+	if admin[c.Sender().ID].User.ID == 0 {
+		t.SetAutoDelete(10).Send("This command is only available to supergroup administrators!!!")
 		return nil
 	}
 

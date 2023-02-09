@@ -43,6 +43,14 @@ func StringMap(a string, x ...any) map[string]string {
 	return smp
 }
 
+type AdminRule map[int64]tb.AdminInfo
+
+func AdminMap(a string, x ...any) AdminRule{
+	info := make(AdminRule)
+	json.UnmarshalString(a, &info)
+	return info
+}
+
 // Send files with tele.Bot
 /*func (*Func) FS(c tele.Context, u int64, msg any) (*tele.Message, error) {
 	return c.Bot().Send(tele.ChatID(u), msg)

@@ -43,7 +43,8 @@ func Start() {
 
 	t := tb.New().
 		SetClient(fn.Client()).
-		SetError(func(err error, ctx tele.Context) { log.Use().Error(err.Error()) }).SetKey(F.String("Key"))
+		SetError(func(err error, ctx tele.Context) { log.Use().Error(err.Error()) }).
+		SetKey(F.String("Key"))
 
 	fmt.Println(T() + " Registering...")
 	b := t.NewBot()
