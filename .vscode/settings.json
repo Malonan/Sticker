@@ -5,6 +5,7 @@
         "dbstr",
         "dialector",
         "Dont",
+        "gmake",
         "gorm",
         "libg",
         "liblog",

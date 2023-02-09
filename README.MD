@@ -6,7 +6,7 @@
 
 
 <br>
-<p align="center"><a href="https://github.com/Malonan/Sticker/releases">Download</a> | <a href="https://github.com/Malonan/Sticker/tree/master/wiki">Wiki</a> | <a href="https://github.com/Malonan/Sticker/issues">Issues</a> | <a href="https://github.com//Malonan/Sticker#Donate">Donate</a> | <a href="https://github.com//Malonan/Sticker#Notice">Notice</a></p>
+<p align="center"><a href="https://github.com/Malonan/Sticker/releases">Download</a> | <a href="https://github.com/Malonan/Sticker/tree/master/wiki">Wiki</a> | <a href="https://github.com/Malonan/Sticker/issues">Issues</a> | [Donate](#Donate) | [Notice](#Notice) </p>
 
 <br>
 
@@ -21,10 +21,10 @@ Example: <a href="https://t.me/IDontLikeThisStickerBot">@IDontLikeThisStickerBot
 <br>
 
 # Install
-1. <a href="https://github.com/Malonan/Sticker/releases">Download</a> archive package. (Only Linux X86_64 builds provided)
+1. [Download](https://github.com/Malonan/Sticker/releases) archive package. (Only Linux X86_64 builds provided)
 2. Unzip it to any folder.
 3. `wget https://github.com/Malonan/Sticker/raw/Config/sticker.yml` -- Download configuration file, then modify it.
-4. <a href="https://github.com//Malonan/Sticker#persistent-service">Configure persistent services </a> (optional)
+4. [Configure persistent services](#persistent-service) (optional)
 5. Done!
 
 <br>
@@ -33,14 +33,14 @@ Example: <a href="https://t.me/IDontLikeThisStickerBot">@IDontLikeThisStickerBot
 
 ## Prerequisites
 
-git, wget, GNU Make, golang(must 1.19.x), then no more
+git, wget, [gmake2](https://github.com/3JoB/gmake2), golang(must 1.20.x), then no more
 <br>
 
 ## Step
 1. `git clone https://github.com/Malonan/Sticker && cd Sticker`
-2. `go mod tidy && go build -ldflags "-s -w"` (Remember to turn off CGO)
-3. `wget https://github.com/Malonan/Sticker/raw/Config/sticker.yml` -- Download configuration file, then modify it.
-4. <a href="https://github.com//Malonan/Sticker#persistent-service">Configure persistent services </a> (optional)
+2. `gmake2`
+3. `wget https://github.com/Malonan/Sticker/raw/Config/sticker.yml` -- Download configuration file, then modify it. (If gmake2 is used, it will be downloaded automatically)
+4. [Configure persistent services](#persistent-service) (optional)
 5. Done!
 
 <br>
@@ -48,7 +48,7 @@ git, wget, GNU Make, golang(must 1.19.x), then no more
 # Persistent Service
 ## Step
 
-1. `wget https://github.com/Malonan/Sticker/raw/Config/sticker.service`
+1. `wget https://github.com/Malonan/Sticker/raw/Config/sticker.service` (If gmake2 is used, it will be downloaded automatically)
 2. Modify the executable file directory in it
 3. `mv sticker.service /usr/lib/systemd/system/sticker.service`
 4. `systemectl start sticker`
