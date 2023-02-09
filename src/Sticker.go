@@ -59,6 +59,7 @@ func CommandStickerBan(c tele.Context) error {
 		t.SetAutoDelete(10).Send("Insufficient rights for the robot, please grant administrator rights to the robot.")
 		return nil
 	}
+
 	// Must reply to a message with command
 	if !c.Message().IsReply() {
 		t.SetAutoDelete(10).Send("Please use this command to reply to a message!!!")

@@ -34,6 +34,14 @@ func ServiceSticker(c tele.Context) error {
 			return c.Bot().Leave(c.Chat())
 		}
 	}
+
+	admin := Int64Map(rd.Get(ctx, "sticker_Admin_"+cast.ToString(c.Chat().ID)).Result())
+
+	// Robot Permissions Check
+	if admin[c.Bot().Me.ID] != 1 {
+		return nil
+	}
+
 	if c.Message().Sticker.SetName == "" {
 		return c.Delete()
 	}
