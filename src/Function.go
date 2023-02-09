@@ -68,8 +68,7 @@ func (*Func) Edit(c tele.Context, msg ...any) error {
 func GetAdminList(c tele.Context) error {
 	t, err := tb.New().SetContext(c).SetChatID(c.Chat().ID).GetAdminList()
 	if err != nil {
-		tb.New().SetContext(c).SetAutoDelete(10).Send(err.Error())
-		return nil
+		return err
 	}
 	rd.Set(ctx, "sticker_Admin_"+cast.ToString(c.Chat().ID), json.Marshal(&t).String(), 0)
 	db.Updates(&dbstr.Config{Gid: c.Chat().ID, Admin: json.Marshal(&t).String()})

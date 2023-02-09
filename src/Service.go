@@ -70,5 +70,8 @@ func ServiceJoinToGroup(c tele.Context) error {
 You can deploy an identical instance at https://github.com/Malonan/Sticker, or you can learn how to use this bot.`
 	t.Send(msg)
 	Add(c.Chat().ID)
-	return GetAdminList(c)
+	if err := GetAdminList(c); err != nil {
+		t.SetAutoDelete(10).Send(err.Error())
+	}
+	return nil
 }

@@ -52,7 +52,10 @@ func CommandRefresh(c tele.Context) error {
 	}
 	admin := Int64Map(rd.Get(ctx, "sticker_Admin_"+cast.ToString(c.Chat().ID)).Result())
 	if len(admin) == 0 {
-		GetAdminList(c)
+		if err := GetAdminList(c); err != nil {
+			t.SetAutoDelete(10).Send(err.Error())
+			return nil
+		}
 		t.SetAutoDelete(10).Send("The current group management list is empty and is trying to get it.\nIf you can't get it, check that the bot has been granted administrator privileges.")
 		return nil
 	}

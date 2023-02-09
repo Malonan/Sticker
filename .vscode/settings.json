@@ -1,7 +1,13 @@
 {
     "go.toolsEnvVars": {},
     "cSpell.words": [
+        "Datetime",
         "dbstr",
+        "dialector",
+        "Dont",
+        "gorm",
+        "libg",
+        "liblog",
         "supergroup",
         "tbmw",
         "tele"
