@@ -1,13 +1,16 @@
 {
     "go.toolsEnvVars": {},
     "cSpell.words": [
+        "aarch",
         "Datetime",
         "dbstr",
         "dialector",
         "Dont",
         "Ewhm",
         "gmake",
+        "GOARCH",
         "gorm",
+        "ldflags",
         "libfn",
         "libg",
         "liblog",
