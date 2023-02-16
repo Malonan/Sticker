@@ -3,8 +3,8 @@ module sticker
 go 1.20
 
 require (
-	github.com/3JoB/telebot v0.0.0-20230207090513-f455f6c7aae9
-	github.com/3JoB/ulib v0.0.11
+	github.com/3JoB/telebot v0.1.0
+	github.com/3JoB/ulib v0.0.13
 	github.com/knadh/koanf v1.5.0
 	github.com/natefinch/lumberjack v2.0.0+incompatible
 	github.com/redis/go-redis/v9 v9.0.2
@@ -15,6 +15,7 @@ require (
 )
 
 require (
+	github.com/3JoB/unsafeConvert v0.0.1 // indirect
 	github.com/cespare/xxhash/v2 v2.2.0 // indirect
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
 	github.com/fsnotify/fsnotify v1.6.0 // indirect

@@ -47,7 +47,7 @@ func Start() {
 		SetKey(F.String("Key"))
 
 	fmt.Println(T() + " Registering...")
-	b := t.NewBot()
+	b := t.CreateBot()
 	b.RemoveWebhook()
 	b.Middleware(middleware.Recover())
 	// b.Middleware(middleware.AutoRespond())
