@@ -22,7 +22,7 @@ import (
 
 	tele "github.com/3JoB/telebot"
 	"github.com/3JoB/telebot/middleware"
-	tb "github.com/3JoB/ulib/telebot/Bot"
+	tb "github.com/3JoB/ulib/telebot/bot"
 	tbmw "github.com/3JoB/ulib/telebot/middleware"
 
 	"sticker/lib/config"
