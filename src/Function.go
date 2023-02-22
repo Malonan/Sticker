@@ -58,7 +58,7 @@ var errs = errors.New("p")
 
 func packet(t *tb.Use) error {
 	// Check if the chat is a supergroup
-	if t.Context.Chat().Type != tele.ChatSuperGroup || t.Context.Chat().Type != tele.ChatGroup {
+	if t.Context.Chat().Type == tele.ChatPrivate || t.Context.Chat().Type == tele.ChatChannel || t.Context.Chat().Type == tele.ChatPrivate {
 		t.SetAutoDelete(12).Send("This command can only be used within a supergroup!!!")
 		return errs
 	}

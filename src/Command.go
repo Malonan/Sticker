@@ -36,7 +36,7 @@ You can deploy an identical instance at https://github.com/Malonan/Sticker, or y
 
 func CommandRefresh(c tele.Context) error {
 	// Check if the chat is a supergroup
-	if c.Chat().Type != tele.ChatSuperGroup || c.Chat().Type != tele.ChatGroup {
+	if c.Chat().Type == tele.ChatPrivate || c.Chat().Type == tele.ChatChannel || c.Chat().Type == tele.ChatPrivate {
 		return nil
 	}
 	c.Delete()
