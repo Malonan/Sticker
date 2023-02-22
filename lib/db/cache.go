@@ -51,10 +51,9 @@ func CheckCacheDB() {
 		} else {
 			if reconnect != 0 {
 				reconnect = 0
+			} else {
+				time.Sleep(time.Minute)
 			}
-		}
-		if reconnect == 0 {
-			time.Sleep(time.Minute)
 		}
 	}
 }

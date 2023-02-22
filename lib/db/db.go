@@ -74,12 +74,21 @@ func init() {
 }
 
 func CheckSQLDB(sqlDB *sql.DB) {
+	reconnect := 0
 	for {
 		if err := sqlDB.Ping(); err != nil {
-			sqlDB.Close()
-			panic(err)
+			if reconnect > 10 {
+				sqlDB.Close()
+				panic(err)
+			}
+			reconnect++
+		} else {
+			if reconnect != 0 {
+				reconnect = 0
+			} else {
+				time.Sleep(time.Minute)
+			}
 		}
-		time.Sleep(time.Minute)
 	}
 }
 
