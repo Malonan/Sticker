@@ -4,7 +4,7 @@ go 1.20
 
 require (
 	github.com/3JoB/telebot v1.0.0
-	github.com/3JoB/ulib v1.1.0
+	github.com/3JoB/ulib v1.1.3-3
 	github.com/knadh/koanf v1.5.0
 	github.com/natefinch/lumberjack v2.0.0+incompatible
 	github.com/redis/go-redis/v9 v9.0.2

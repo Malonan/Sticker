@@ -30,43 +30,48 @@ func Add(g int64) {
 }
 
 func CommandStickerBan(c tele.Context) error {
-	c.Delete()
+	// fmt.Println(json.Marshal(c.Message()).String())
 	t := tb.New().SetContext(c)
-	if err := packet(t); err != nil {
+	if c.Chat().IsForum {
+		t = t.SetTopicID(int64(c.Message().ThreadID))
+	}
+	if err := packet(tb.New().SetContext(c)); err == errs {
 		return nil
 	}
 	// Must reply to a message with command
 	if !c.Message().IsReply() {
-		t.SetAutoDelete(10).Send("Please use this command to reply to a message!!!")
+		CheckErr(t.SetAutoDelete(10).SetDeleteCommand().Send("Please use this command to reply to a message!!!"))
 		return nil
 	}
 	// If the message object is not a sticker
 	if c.Message().ReplyTo.Sticker == nil {
-		t.SetAutoDelete(12).Send("The selected object must be a sticker!!!")
+		CheckErr(t.SetAutoDelete(12).SetDeleteCommand().Send("The selected object must be a sticker!!!"))
 		return nil
 	}
 	// If the message object is not a sticker
 	if c.Message().ReplyTo.Sticker.SetName == "" {
-		t.SetAutoDelete(12).Send("The selected object must be a sticker!!!")
+		CheckErr(t.SetAutoDelete(12).SetDeleteCommand().Send("The selected object must be a sticker!!!"))
 		return nil
 	}
 
 	// I hate the map[string]string bug in 1.20.
 	// It makes the following code completely impossible to run!!!
 
-	rule := StringMap(rd.Get(ctx, "sticker_Rule_"+cast.ToString(c.Chat().ID)).Result())
+	t = tb.New().SetContext(c)
+
+	rule := RuleMap(c.Chat().ID)
 	if rule[c.Message().ReplyTo.Sticker.SetName] == "" {
 		rule[c.Message().ReplyTo.Sticker.SetName] = "v"
 		rules := json.Marshal(&rule).String()
 		rd.Set(ctx, "sticker_Rule_"+cast.ToString(c.Chat().ID), rules, 0)
 		dbs.Updates(&dbstr.Config{Gid: c.Chat().ID, Data: rules})
-		t.SetAutoDelete(10).Send("I already remember you!!!")
+		CheckErr(t.SetAutoDelete(10).Send("I already remember you!!!"))
 		return nil
 	}
 	delete(rule, c.Message().ReplyTo.Sticker.SetName)
 	rules := json.Marshal(&rule).String()
 	dbs.Updates(&dbstr.Config{Gid: c.Chat().ID, Data: rules})
 	rd.Set(ctx, "sticker_Rule_"+cast.ToString(c.Chat().ID), rules, 0)
-	t.SetAutoDelete(10).Send("my memory of it has faded...")
+	CheckErr(t.SetAutoDelete(10).Send("my memory of it has faded..."))
 	return nil
 }

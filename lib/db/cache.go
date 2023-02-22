@@ -18,6 +18,7 @@ package db
 
 import (
 	"context"
+	"errors"
 	"time"
 
 	"github.com/redis/go-redis/v9"
@@ -26,6 +27,8 @@ import (
 var (
 	rd  *redis.Client
 	ctx = context.Background()
+
+	ErrTimeout = errors.New("redis: connection pool timeout")
 )
 
 func init() {
@@ -38,11 +41,21 @@ func init() {
 }
 
 func CheckCacheDB() {
+	reconnect := 0
 	for {
 		if err := rd.Conn().Ping(ctx).Err(); err != nil {
-			panic(err)
+			if reconnect > 10 {
+				panic(err)
+			}
+			reconnect++
+		} else {
+			if reconnect != 0 {
+				reconnect = 0
+			}
 		}
-		time.Sleep(time.Minute)
+		if reconnect == 0 {
+			time.Sleep(time.Minute)
+		}
 	}
 }
 

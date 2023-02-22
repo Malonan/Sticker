@@ -21,7 +21,7 @@ import (
 	"time"
 
 	tele "github.com/3JoB/telebot"
-	"github.com/3JoB/telebot/middleware"
+	//"github.com/3JoB/telebot/middleware"
 	tb "github.com/3JoB/ulib/telebot/bot"
 	tbmw "github.com/3JoB/ulib/telebot/middleware"
 
@@ -49,7 +49,7 @@ func Start() {
 	fmt.Println(T() + " Registering...")
 	b := t.CreateBot()
 	b.RemoveWebhook()
-	b.Middleware(middleware.Recover())
+	//b.Middleware(middleware.Recover())
 	// b.Middleware(middleware.AutoRespond())
 	b.Middleware(tbmw.Logger(&tbmw.LogSettings{Path: "./log/", FileName: "sticker-log"}))
 	src.Handle(b.B)

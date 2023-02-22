@@ -39,19 +39,18 @@ func CommandRefresh(c tele.Context) error {
 	if c.Chat().Type == tele.ChatPrivate || c.Chat().Type == tele.ChatChannel || c.Chat().Type == tele.ChatPrivate {
 		return nil
 	}
-	c.Delete()
 	t := tb.New().SetContext(c)
 	admin := AdminMap(c.Chat().ID)
 	if len(admin) != 0 {
 		// Prevent non-admins from operating the bot
 		if admin[c.Sender().ID].User.ID == 0 {
-			t.SetAutoDelete(10).Send("This command is only available to supergroup administrators!!!")
+			CheckErr(t.SetAutoDelete(10).SetDeleteCommand().Send("This command is only available to supergroup administrators!!!"))
 			return nil
 		}
 	}
 	t.SetAutoDelete(10).Send("Refreshing admin list...")
 	if err := GetAdminList(c); err != nil {
-		t.SetAutoDelete(12).Send(err.Error())
+		CheckErr(t.SetAutoDelete(12).SetDeleteCommand().Send(err.Error()))
 	}
 	return nil
 }
@@ -61,7 +60,6 @@ func CommandSelectMode(c tele.Context) error {
 	if err := packet(t); err != nil {
 		return nil
 	}
-	c.Delete()
 	modetype, _ := rd.Get(ctx, "sticker_Config_Mode_"+cast.ToString(c.Chat().ID)).Bool()
 	if modetype {
 		rd.Set(ctx, "sticker_Config_Mode_"+cast.ToString(c.Chat().ID), false, 0)
@@ -71,6 +69,6 @@ func CommandSelectMode(c tele.Context) error {
 	}
 	rd.Set(ctx, "sticker_Config_Mode_"+cast.ToString(c.Chat().ID), true, 0)
 	dbs.Select("Modetype").Updates(&dbstr.Config{Gid: c.Chat().ID, Modetype: true})
-	t.SetAutoDelete(12).Send("Group sticker checking mode has been switched to whitelist mode!")
+	t.SetAutoDelete(12).SetDeleteCommand().Send("Group sticker checking mode has been switched to whitelist mode!")
 	return nil
 }

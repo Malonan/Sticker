@@ -18,6 +18,7 @@ package src
 
 import (
 	"errors"
+	"fmt"
 
 	tele "github.com/3JoB/telebot"
 	"github.com/3JoB/ulib/json"
@@ -59,7 +60,6 @@ var errs = errors.New("p")
 func packet(t *tb.Use) error {
 	// Check if the chat is a supergroup
 	if t.Context.Chat().Type == tele.ChatPrivate || t.Context.Chat().Type == tele.ChatChannel || t.Context.Chat().Type == tele.ChatPrivate {
-		t.SetAutoDelete(12).Send("This command can only be used within a supergroup!!!")
 		return errs
 	}
 	// If whitelisted groups are enabled
@@ -130,6 +130,12 @@ func CheckPerm(c tele.Context) error {
 		return errs
 	}
 	return nil
+}
+
+func CheckErr(v any, r error) {
+	if r != nil {
+		fmt.Println(r.Error())
+	}
 }
 
 // Format Timestamp
