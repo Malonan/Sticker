@@ -32,6 +32,6 @@ func init() {
 	}
 }
 
-func F() *koanf.Koanf {
+func Get() *koanf.Koanf {
 	return k
 }

@@ -32,11 +32,9 @@ func Add(g int64) {
 func CommandStickerBan(c tele.Context) error {
 	c.Delete()
 	t := tb.New().SetContext(c)
-
-	if err := packet1(t); err != nil {
+	if err := packet(t); err != nil {
 		return nil
 	}
-
 	// Must reply to a message with command
 	if !c.Message().IsReply() {
 		t.SetAutoDelete(10).Send("Please use this command to reply to a message!!!")

@@ -3,8 +3,8 @@ module sticker
 go 1.20
 
 require (
-	github.com/3JoB/telebot v0.1.1
-	github.com/3JoB/ulib v0.1.4
+	github.com/3JoB/telebot v1.0.0
+	github.com/3JoB/ulib v1.1.0
 	github.com/knadh/koanf v1.5.0
 	github.com/natefinch/lumberjack v2.0.0+incompatible
 	github.com/redis/go-redis/v9 v9.0.2
@@ -31,7 +31,8 @@ require (
 	github.com/tidwall/gjson v1.14.4 // indirect
 	github.com/tidwall/match v1.1.1 // indirect
 	github.com/tidwall/pretty v1.2.1 // indirect
-	golang.org/x/sys v0.4.0 // indirect
+	golang.org/x/sys v0.5.0 // indirect
 	golang.org/x/text v0.7.0 // indirect
+	gopkg.in/natefinch/lumberjack.v2 v2.2.1 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )

@@ -29,7 +29,7 @@ import (
 var (
 	rd  = db.GetRedis() // CacheDB
 	dbs = db.GetDB()    // DataBase
-	F   = config.F()    // Config
+	F   = config.Get()  // Config
 
 	ctx = context.Background()
 
@@ -45,23 +45,17 @@ func init() {
 
 func Init() {
 	dbs.AutoMigrate(&dbstr.Config{})
-
 	// Initialize the list of super administrators
 	for _, r := range F.Int64s("admin") {
 		SuperAdmin[r] = 1
 	}
-
 	// Initialize whitelist groups (if enabled)
 	if F.Bool("whitelist_mode") {
 		for _, r := range F.Int64s("whitelist") {
 			WhiteList[r] = 1
 		}
 	}
-
-	var (
-		config []dbstr.Config
-	)
-
+	var config []dbstr.Config
 	dbs.Find(&config)
 
 	/*Store database content in Redis

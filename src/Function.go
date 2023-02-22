@@ -33,6 +33,8 @@ type AdminList struct {
 	} `json:"user"`
 }
 
+type AdminRule map[int64]tb.AdminInfo
+
 func Int64Map(a string, x ...any) map[int64]int {
 	smp := make(map[int64]int)
 	json.UnmarshalString(a, &smp)
@@ -45,58 +47,44 @@ func StringMap(a string, x ...any) map[string]string {
 	return smp
 }
 
-type AdminRule map[int64]tb.AdminInfo
-
-func AdminMap(a string, x ...any) AdminRule {
+func AdminMap(v int64) AdminRule {
+	a, _ := rd.Get(ctx, "sticker_Admin_"+cast.ToString(v)).Result()
 	info := make(AdminRule)
 	json.UnmarshalString(a, &info)
 	return info
 }
 
-var (
-	errs = errors.New("p")
-)
+var errs = errors.New("p")
 
-func packet1(t *tb.Use, ref ...any) error {
+func packet(t *tb.Use) error {
 	// Check if the chat is a supergroup
-	if t.Ctx.Chat().Type != "supergroup" {
+	if t.Context.Chat().Type != tele.ChatSuperGroup || t.Context.Chat().Type != tele.ChatGroup {
 		t.SetAutoDelete(12).Send("This command can only be used within a supergroup!!!")
 		return errs
 	}
 	// If whitelisted groups are enabled
 	if F.Bool("whitelist_mode") {
 		// Stop serving non-whitelisted groups
-		if WhiteList[t.Ctx.Chat().ID] != 1 {
+		if WhiteList[t.Context.Chat().ID] != 1 {
 			t.Send("This group is not available for this function!!!")
 			// leave group
-			t.Ctx.Bot().Leave(t.Ctx.Chat())
+			t.Leave()
 			return errs
 		}
 	}
 
-	admin := AdminMap(rd.Get(ctx, "sticker_Admin_"+cast.ToString(t.Ctx.Chat().ID)).Result())
-	if len(ref) != 0 {
-		if len(admin) == 0 {
-			if err := GetAdminList(t.Ctx); err != nil {
-				t.SetAutoDelete(10).Send(err.Error())
-				return errs
-			}
-			t.SetAutoDelete(10).Send("The current group management list is empty and is trying to get it.\nIf you can't get it, check that the bot has been granted administrator privileges.")
-			return errs
-		}
-	}
-
+	admin := AdminMap(t.Context.Chat().ID)
 	// Prevent non-admins from operating the bot
-	if admin[t.Ctx.Bot().Me.ID].User.ID == 0 {
+	if admin[t.Context.Bot().Me.ID].User.ID == 0 {
 		t.SetAutoDelete(10).Send("The robot is not a group administrator, the operation is not available.")
 		return errs
 	}
-	if !admin[t.Ctx.Bot().Me.ID].CanDeleteMessages {
+	if !admin[t.Context.Bot().Me.ID].CanDeleteMessages {
 		t.SetAutoDelete(10).Send("Insufficient permissions for the robot to operate.")
 		return errs
 	}
 	// Prevent non-admins from operating the bot
-	if admin[t.Ctx.Sender().ID].User.ID == 0 {
+	if admin[t.Context.Sender().ID].User.ID == 0 {
 		t.SetAutoDelete(10).Send("This command is only available to supergroup administrators!!!")
 		return errs
 	}
@@ -125,6 +113,22 @@ func GetAdminList(c tele.Context) error {
 	rd.Set(ctx, "sticker_Admin_"+cast.ToString(c.Chat().ID), json.Marshal(&t).String(), 0)
 	dbs.Updates(&dbstr.Config{Gid: c.Chat().ID, Admin: json.Marshal(&t).String()})
 	tb.New().SetContext(c).SetAutoDelete(10).Send("The admin list has been refreshed.")
+	return nil
+}
+
+func RuleMap(v int64) map[string]string {
+	return StringMap(rd.Get(ctx, "sticker_Rule_"+cast.ToString(v)).Result())
+}
+
+func CheckPerm(c tele.Context) error {
+	admin := AdminMap(c.Chat().ID)
+	// Robot Permissions Check
+	if admin[c.Bot().Me.ID].User.ID == 0 {
+		return errs
+	}
+	if !admin[c.Bot().Me.ID].CanDeleteMessages {
+		return errs
+	}
 	return nil
 }
 

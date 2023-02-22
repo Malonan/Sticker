@@ -23,33 +23,17 @@ import (
 )
 
 func ServiceSticker(c tele.Context) error {
-	if c.Chat().Type != "supergroup" {
-		return nil
-	}
-	// If whitelisted groups are enabled
-	if F.Bool("whitelist_mode") {
-		// Stop serving non-whitelisted groups
-		if WhiteList[c.Chat().ID] != 1 {
-			// leave group
-			return c.Bot().Leave(c.Chat())
+	if err := CheckPerm(c); err != nil {
+		if err == errs {
+			return nil
 		}
-	}
-
-	admin := AdminMap(rd.Get(ctx, "sticker_Admin_"+cast.ToString(c.Chat().ID)).Result())
-
-	// Robot Permissions Check
-	if admin[c.Bot().Me.ID].User.ID == 0 {
-		return nil
-	}
-	if !admin[c.Bot().Me.ID].CanDeleteMessages {
-		return nil
 	}
 
 	if c.Message().Sticker.SetName == "" {
 		return c.Delete()
 	}
 
-	rule := StringMap(rd.Get(ctx, "sticker_Rule_"+cast.ToString(c.Chat().ID)).Result())
+	rule := RuleMap(c.Chat().ID)
 	modetype, _ := rd.Get(ctx, "sticker_Config_Mode_"+cast.ToString(c.Chat().ID)).Bool()
 
 	// If whitelist mode is enabled
@@ -73,7 +57,7 @@ func ServiceSticker(c tele.Context) error {
 }
 
 func ServiceJoinToGroup(c tele.Context) error {
-	if c.Chat().Type != "supergroup" {
+	if c.Chat().Type != tele.ChatSuperGroup || c.Chat().Type != tele.ChatGroup {
 		return nil
 	}
 	t := tb.New().SetContext(c)

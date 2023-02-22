@@ -25,7 +25,7 @@ import (
 )
 
 func CommandStart(c tele.Context) error {
-	if c.Chat().Type != "private" {
+	if c.Chat().Type != tele.ChatPrivate {
 		return nil
 	}
 	msg := `This is me! Are you ready to be filled with my wrath? (just kidding)
@@ -35,18 +35,20 @@ You can deploy an identical instance at https://github.com/Malonan/Sticker, or y
 }
 
 func CommandRefresh(c tele.Context) error {
-	if c.Chat().Type != "supergroup" {
-		c.Send("What?")
+	// Check if the chat is a supergroup
+	if c.Chat().Type != tele.ChatSuperGroup || c.Chat().Type != tele.ChatGroup {
 		return nil
 	}
 	c.Delete()
-
 	t := tb.New().SetContext(c)
-
-	if err := packet1(t, 1); err != nil {
-		return nil
+	admin := AdminMap(c.Chat().ID)
+	if len(admin) != 0 {
+		// Prevent non-admins from operating the bot
+		if admin[c.Sender().ID].User.ID == 0 {
+			t.SetAutoDelete(10).Send("This command is only available to supergroup administrators!!!")
+			return nil
+		}
 	}
-
 	t.SetAutoDelete(10).Send("Refreshing admin list...")
 	if err := GetAdminList(c); err != nil {
 		t.SetAutoDelete(12).Send(err.Error())
@@ -56,7 +58,7 @@ func CommandRefresh(c tele.Context) error {
 
 func CommandSelectMode(c tele.Context) error {
 	t := tb.New().SetContext(c)
-	if err := packet1(t); err != nil {
+	if err := packet(t); err != nil {
 		return nil
 	}
 	c.Delete()

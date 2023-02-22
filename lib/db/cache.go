@@ -18,6 +18,7 @@ package db
 
 import (
 	"context"
+	"time"
 
 	"github.com/redis/go-redis/v9"
 )
@@ -29,12 +30,19 @@ var (
 
 func init() {
 	rd = redis.NewClient(&redis.Options{
-		Addr:     kc().String("cache.addr"),
-		Password: kc().String("cache.pwd"), // no password set
-		DB:       kc().Int("cache.db"),     // use default DB
+		Addr:     kc.String("cache.addr"),
+		Password: kc.String("cache.pwd"), // no password set
+		DB:       kc.Int("cache.db"),     // use default DB
 	})
-	if err := rd.Conn().Ping(ctx).Err(); err != nil {
-		panic(err)
+	go CheckCacheDB()
+}
+
+func CheckCacheDB() {
+	for {
+		if err := rd.Conn().Ping(ctx).Err(); err != nil {
+			panic(err)
+		}
+		time.Sleep(time.Minute)
 	}
 }
 

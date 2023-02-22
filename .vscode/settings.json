@@ -15,12 +15,15 @@
         "libg",
         "liblog",
         "Malonan",
+        "SQLDB",
         "supergroup",
         "systemectl",
         "tbmw",
         "tele",
         "telebot",
         "ulib",
-        "UQCK"
+        "UQCK",
+        "WHLM",
+        "WHLMH"
     ]
 }

@@ -17,6 +17,7 @@ package db
 */
 
 import (
+	"database/sql"
 	"time"
 
 	"gorm.io/driver/mysql"
@@ -30,12 +31,13 @@ import (
 
 var (
 	db *gorm.DB
-	kc = config.F
+	kc = config.Get()
 )
 
 func init() {
 	var dialector gorm.Dialector
-	dsn := kc().String("database.user") + ":" + kc().String("database.pass") + "@tcp(" + kc().String("database.addr") + ")/" + kc().String("database.db") + "?charset=utf8mb4&parseTime=True&loc=Local"
+	var err error
+	dsn := kc.String("database.user") + ":" + kc.String("database.pass") + "@tcp(" + kc.String("database.addr") + ")/" + kc.String("database.db") + "?charset=utf8mb4&parseTime=True&loc=Local"
 	dialector = mysql.New(mysql.Config{
 		DSN:                       dsn,
 		DefaultStringSize:         256,
@@ -44,7 +46,7 @@ func init() {
 		DontSupportRenameColumn:   true,
 		SkipInitializeWithVersion: false,
 	})
-	conn, err := gorm.Open(dialector, &gorm.Config{
+	db, err = gorm.Open(dialector, &gorm.Config{
 		Logger: logger.Default.LogMode(logger.Error),
 		NamingStrategy: schema.NamingStrategy{
 			SingularTable: true,
@@ -54,30 +56,33 @@ func init() {
 		log.Use().Println(err.Error())
 		panic(err)
 	}
-	sqlDB, err := conn.DB()
+	sqlDB, err := db.DB()
 	if err != nil {
 		log.Use().Println("connect db server failed.")
+		sqlDB.Close()
 		panic(err)
 	}
 	sqlDB.SetMaxOpenConns(100)
 	sqlDB.SetMaxIdleConns(10)
 	sqlDB.SetConnMaxLifetime(600 * time.Second)
 
-	db = conn
-}
-
-func GetDB() *gorm.DB {
-	sqlDB, err := db.DB()
-	if err != nil {
-		log.Use().Println("connect db server failed.")
-		panic(err)
-	}
 	db.Callback().Query().Before("gorm:query").Register("disable_raise_record_not_found", func(d *gorm.DB) {
 		d.Statement.RaiseErrorOnNotFound = false
 	})
-	if err = sqlDB.Ping(); err != nil {
-		sqlDB.Close()
-		panic(err)
+
+	go CheckSQLDB(sqlDB)
+}
+
+func CheckSQLDB(sqlDB *sql.DB) {
+	for {
+		if err := sqlDB.Ping(); err != nil {
+			sqlDB.Close()
+			panic(err)
+		}
+		time.Sleep(time.Minute)
 	}
+}
+
+func GetDB() *gorm.DB {
 	return db
 }
