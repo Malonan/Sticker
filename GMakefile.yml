@@ -21,4 +21,4 @@ all: |
   @env CGO_ENABLED 0
   go build -ldflags "-s -w"
   @dl https://github.com/Malonan/Sticker/raw/Config/sticker.yml
-  @dl wget https://github.com/Malonan/Sticker/raw/Config/sticker.service
+  @dl https://github.com/Malonan/Sticker/raw/Config/sticker.service
