@@ -19,7 +19,7 @@ package log
 import (
 	"path"
 
-	"github.com/natefinch/lumberjack"
+	"gopkg.in/natefinch/lumberjack.v2"
 	"github.com/sirupsen/logrus"
 )
 
