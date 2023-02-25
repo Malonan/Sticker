@@ -30,7 +30,6 @@ func Add(g int64) {
 }
 
 func CommandStickerBan(c tele.Context) error {
-	// fmt.Println(json.Marshal(c.Message()).String())
 	t := tb.New().SetContext(c)
 	if c.Chat().IsForum {
 		t = t.SetTopicID(int64(c.Message().ThreadID))
