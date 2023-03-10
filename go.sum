@@ -1,5 +1,5 @@
-github.com/3JoB/telebot v1.0.2 h1:VNZ/Y7BX1D+ktDjh7LsIOeHZ4Xt5ViTZTLm+Yi9K0FU=
-github.com/3JoB/telebot v1.0.2/go.mod h1:u6eImM1ku2IT4rAvvlI+zbdRhh7OVKPK28OGgXhKjU0=
+github.com/3JoB/telebot v1.1.1 h1:eRdF4TErM4LIVW3ArJFOUUKEDVEUngg0ltNFN3Fh3TM=
+github.com/3JoB/telebot v1.1.1/go.mod h1:S+BBJYCqE2Gt2e+Iw3gJN8FVYCv5jyJB6+nbQZKi3vY=
 github.com/3JoB/ulib v1.11.0 h1:Wf884X5IPFFoHc5/9ASwcJQFUszruM/J9rBbOdPy5YM=
 github.com/3JoB/ulib v1.11.0/go.mod h1:ZuqrVk6Vw0N6F3psqBBLZPDIfLGYDHW5oBktasYvmD4=
 github.com/3JoB/unsafeConvert v1.2.0 h1:LwrA8esUBzuKTwCPdufgWbDKENKLfzYWwhB6d/dedFg=
@@ -69,8 +69,8 @@ golang.org/x/sys v0.0.0-20220715151400-c0bba94af5f8/go.mod h1:oPkhp1MJrh7nUepCBc
 golang.org/x/sys v0.0.0-20220908164124-27713097b956/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
 golang.org/x/sys v0.5.0 h1:MUK/U/4lj1t1oPg0HfuXDN/Z1wv31ZJ/YcPiGccS4DU=
 golang.org/x/sys v0.5.0/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
-golang.org/x/text v0.7.0 h1:4BRB4x83lYWy72KwLD/qYDuTu7q9PjSagHvijDw7cLo=
-golang.org/x/text v0.7.0/go.mod h1:mrYo+phRRbMaCq/xk9113O4dZlRixOauAjOtrjsXDZ8=
+golang.org/x/text v0.8.0 h1:57P1ETyNKtuIjB4SRd15iJxuhj8Gc416Y78H3qgMh68=
+golang.org/x/text v0.8.0/go.mod h1:e1OnstbJyHTd6l/uOt8jFFHp6TRDWZR/bV3emEE/zU8=
 golang.org/x/xerrors v0.0.0-20220907171357-04be3eba64a2 h1:H2TDz8ibqkAF6YGhCdN3jS9O0/s90v0rJh3X/OLHEUk=
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405 h1:yhCVgyC4o1eVCa2tZl7eS0r+SDo693bJlVdllGtEeKM=
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=

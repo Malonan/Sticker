@@ -3,7 +3,7 @@ module sticker
 go 1.20
 
 require (
-	github.com/3JoB/telebot v1.0.2
+	github.com/3JoB/telebot v1.1.1
 	github.com/3JoB/ulib v1.11.0
 	github.com/knadh/koanf/parsers/yaml v0.1.0
 	github.com/knadh/koanf/providers/file v0.1.0
@@ -35,6 +35,6 @@ require (
 	github.com/tidwall/match v1.1.1 // indirect
 	github.com/tidwall/pretty v1.2.1 // indirect
 	golang.org/x/sys v0.5.0 // indirect
-	golang.org/x/text v0.7.0 // indirect
+	golang.org/x/text v0.8.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
