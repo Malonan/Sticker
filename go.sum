@@ -1,7 +1,7 @@
 github.com/3JoB/telebot v1.1.2 h1:q6SttxgJq8zMGD21LhHrJwisaIGmrfhvtkMW4g8kX3s=
 github.com/3JoB/telebot v1.1.2/go.mod h1:UvKQQ8N3tEeiAZFMLuUglCZWkdyf5BytYLL5+Swd85o=
-github.com/3JoB/ulib v1.18.0 h1:A43xrygM+2MjbVV3rDtF2IBF9iqyca6HXRdxgjXW4VU=
-github.com/3JoB/ulib v1.18.0/go.mod h1:iu7g/PhTyQX1hxMs3OdfET31oCA5CW/CiIwcv4DkOw0=
+github.com/3JoB/ulib v1.20.0 h1:tfYExxdUqtzQb4tXh8UEZx6SBoFFiEMxEx+I5P/6/pI=
+github.com/3JoB/ulib v1.20.0/go.mod h1:DB8xE90MJdULn66rNz51916/g5VZUon1TR9/bzYNZyk=
 github.com/3JoB/unsafeConvert v1.3.0 h1:HxWedv9pqNZjzkjdvyPToxolN+kjF55lMbsBedhuKR0=
 github.com/3JoB/unsafeConvert v1.3.0/go.mod h1:eSOZxiCOcyEi0vBO56ULYtfXJEn4vafvkebEfI0pYoE=
 github.com/bsm/ginkgo/v2 v2.5.0 h1:aOAnND1T40wEdAtkGSkvSICWeQ8L3UASX7YVCqQx+eQ=
@@ -18,8 +18,8 @@ github.com/fsnotify/fsnotify v1.6.0 h1:n+5WquG0fcWoWp6xPWfHdbskMCQaFnG6PfBrh1Ky4
 github.com/fsnotify/fsnotify v1.6.0/go.mod h1:sl3t1tCWJFWoRz9R8WJCbQihKKwmorjAbSClcnxKAGw=
 github.com/go-sql-driver/mysql v1.7.0 h1:ueSltNNllEqE3qcWBTD0iQd3IpL/6U+mJxLkazJ7YPc=
 github.com/go-sql-driver/mysql v1.7.0/go.mod h1:OXbVy3sEdcQ2Doequ6Z5BW6fXNQTmx+9S1MCJN5yJMI=
-github.com/goccy/go-json v0.10.1 h1:lEs5Ob+oOG/Ze199njvzHbhn6p9T+h64F5hRj69iTTo=
-github.com/goccy/go-json v0.10.1/go.mod h1:6MelG93GURQebXPDq3khkgXZkazVtN9CRI+MGFi0w8I=
+github.com/goccy/go-json v0.10.2 h1:CrxCmQqYDkv1z7lO7Wbh2HN93uovUHgrECaO5ZrCXAU=
+github.com/goccy/go-json v0.10.2/go.mod h1:6MelG93GURQebXPDq3khkgXZkazVtN9CRI+MGFi0w8I=
 github.com/google/go-cmp v0.5.7 h1:81/ik6ipDQS2aGcBfIN5dHDB36BwrStyeAQquSYCV4o=
 github.com/grafana/regexp v0.0.0-20221122212121-6b5c0a4cb7fd h1:PpuIBO5P3e9hpqBD0O/HjhShYuM6XE0i/lbE6J94kww=
 github.com/grafana/regexp v0.0.0-20221122212121-6b5c0a4cb7fd/go.mod h1:M5qHK+eWfAv8VR/265dIuEpL3fNfeC21tXXp9itM24A=
