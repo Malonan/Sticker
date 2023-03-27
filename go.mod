@@ -3,8 +3,8 @@ module sticker
 go 1.20
 
 require (
-	github.com/3JoB/telebot v1.1.4-1
-	github.com/3JoB/ulib v1.22.0
+	github.com/3JoB/telebot v1.1.4
+	github.com/3JoB/ulib v1.22.2
 	github.com/knadh/koanf/parsers/yaml v0.1.0
 	github.com/knadh/koanf/providers/file v0.1.0
 	github.com/knadh/koanf/v2 v2.0.0
