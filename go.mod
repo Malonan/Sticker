@@ -12,7 +12,7 @@ require (
 	github.com/sirupsen/logrus v1.9.0
 	github.com/spf13/cast v1.5.0
 	gopkg.in/natefinch/lumberjack.v2 v2.2.1
-	gorm.io/driver/mysql v1.4.7
+	gorm.io/driver/mysql v1.5.0
 	gorm.io/gorm v1.25.0
 )
 
