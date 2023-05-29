@@ -8,7 +8,7 @@ require (
 	github.com/knadh/koanf/parsers/yaml v0.1.0
 	github.com/knadh/koanf/providers/file v0.1.0
 	github.com/knadh/koanf/v2 v2.0.0
-	github.com/redis/go-redis/v9 v9.0.3
+	github.com/redis/go-redis/v9 v9.0.5
 	github.com/sirupsen/logrus v1.9.0
 	github.com/spf13/cast v1.5.0
 	gopkg.in/natefinch/lumberjack.v2 v2.2.1
