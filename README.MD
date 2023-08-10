@@ -1,4 +1,4 @@
-# <center><strong>I Don't Like This Sticker</strong></center>
+# <center><strong>I Don't Like This Sticker [END]</strong></center>
  
 <br>
 
